@@ -1,0 +1,14 @@
+[{
+  "id": "1",
+  "sharedBy": "Promit Barua",
+  "type": "educational",
+  "source": "https://github.com/muhib-dev/raw-nodejs-api",
+  "description": "This is a toturial about making a working api by raw node.js without any frameworks"
+},
+  {
+    "id": "2",
+    "sharedBy": "Promit Barua",
+    "type": "educational",
+    "source": "https://www.smashingmagazine.com/2024/05/beyond-css-media-queries/",
+    "description": "This is an article about the problems and solutions of css media queries. Published by smashingmagazine.com"
+  }]
