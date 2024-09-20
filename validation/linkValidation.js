@@ -5,15 +5,15 @@ import {
   response
 } from "../helpers/response.js";
 
-const validateUserData = async (req, res, next) => {
+const validateLinkData = async (req, res, next) => {
   try {
     const body = await getPostBodyAsync(req);
 
-    if (!body.name || !body.phone || !body.email) {
+    if (!body.type || !body.link) {
       return response(res, {
         status: 400,
         data: {
-          message: "Name, phone and email are required"
+          message: "Type and Link are required"
         },
       });
     }
@@ -32,5 +32,5 @@ const validateUserData = async (req, res, next) => {
 };
 
 export {
-  validateUserData
+  validateLinkData
 };

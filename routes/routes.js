@@ -1,38 +1,38 @@
 import {
-  getUsers,
-  createUser,
-  getUserById,
-  updateUser,
-  deleteUserById
-} from "../controllers/userController.js";
+  getLinks,
+  createLink,
+  getLinkById,
+  updateLink,
+  deleteLinkById
+} from "../controllers/linkController.js";
 import {
   response
 } from "../helpers/response.js";
 import {
-  validateUserData
-} from"../validation/userValidation.js";
+  validateLinkData
+} from"../validation/linkValidation.js";
 
 const routes = {
   "/": {
     GET: (_req, res) => {
       response(res, {
         data: {
-          message: "running nodejs api"
+          message: "Request successful! Try some endpoints."
         }
       });
     },
   },
-  "/users": {
-    GET: getUsers,
+  "/links": {
+    GET: getLinks,
     POST: (req, res) => {
-      validateUserData(req, res, createUser);
+      validateLinkData(req, res, createLink);
     },
   },
-  "/users/:id": {
-    GET: getUserById,
-    DELETE: deleteUserById,
+  "/links/:id": {
+    GET: getLinkById,
+    DELETE: deleteLinkById,
     PUT: (req, res) => {
-      validateUserData(req, res, updateUser);
+      validateUserData(req, res, updateLink);
     },
   },
   notFound: (_req, res) => {

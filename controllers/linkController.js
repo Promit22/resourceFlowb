@@ -1,7 +1,7 @@
 import {
-  getUsers as getAllUsers,
-  getUserById as getById
-} from "../services/userSevice.js";
+  getLinks as getAllLinks,
+  getLinkById as getById
+} from "../services/linkService.js";
 import {
   response
 } from "../helpers/response.js";
@@ -9,29 +9,29 @@ import {
   writeDataAsync
 } from "../helpers/fileHelperAsync.js";
 
-const createUser = async (req, res) => {
+const createLink = async (req, res) => {
   try {
     let body = req.body;
-    const users = await getAllUsers();
+    const links = await getAllLinks();
 
-    const foundUser = users.find((user) => user.name === body.name);
+    const foundLink = links.find((link) => link.link === body.link);
 
-    if (foundUser) {
+    if (foundLink) {
       return response(res, {
         data: {
-          message: `'${body.name}' already exists!`
+          message: `'${body.link}' already exists!`
         },
         status: 409,
       });
     }
 
-    body.id = users.length + 1;
-    users.push(body);
+    body.id = links.length + 1;
+    links.push(body);
 
-    await writeDataAsync(users);
+    await writeDataAsync(links);
 
     response(res, {
-      data: users, status: 201
+      data: links, status: 201
     });
   } catch (error) {
     response(res, {
@@ -41,12 +41,12 @@ const createUser = async (req, res) => {
     });
   }
 };
-const getUsers = async (req, res) => {
+const getLinks = async (req, res) => {
   try {
-    const users = await getAllUsers();
+    const links = await getAllLinks();
 
     response(res, {
-      data: users
+      data: links
     });
   } catch (error) {
     response(res, {
@@ -57,16 +57,15 @@ const getUsers = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
+const getLinkById = async (req, res) => {
   try {
     const {
       id
     } = req.params;
+    const link = await getById(id);
 
-    const user = await getById(id);
-
-    const data = user ? user: {
-      message: `user not found for id '${id}'`
+    const data = link ? link: {
+      message: `link not found for id '${id}'`
     };
     response(res, {
       data
@@ -80,40 +79,40 @@ const getUserById = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateLink = async (req, res) => {
   try {
     const {
       id
     } = req.params;
-    let users = await getAllUsers();
+    let links = await getAllLinks();
 
-    const foundUser = users.find((user) => user.id === Number(id));
-    if (!foundUser) {
+    const foundLink = links.find((link) => link.id === Number(id));
+    if (!foundLink) {
       return response(res, {
         data: {
-          message: "user not found"
+          message: "Link not found"
         },
         status: 400,
       });
     }
 
-    users = users.map((user) => {
-      if (user.id === Number(id)) {
+    links = links.map((link) => {
+      if (link.id === Number(id)) {
         return {
-          ...user,
+          ...link,
           ...req.body,
         };
       }
-      return user;
+      return link;
     });
 
-    await writeDataAsync(users);
+    await writeDataAsync(links);
 
     response(res,
       {
-        data: users,
+        data: links,
         status: 201,
-        message: "user successfully updated",
+        message: "link successfully updated",
       });
   } catch (error) {
     response(res,
@@ -126,26 +125,26 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUserById = async (req, res) => {
+const deleteLinkById = async (req, res) => {
   try {
     const {
       id
     } = req.params;
-    let users = await getAllUsers();
+    let links = await getAllLinks();
 
-    const foundUser = users.find((user) => user.id === Number(id));
-    if (!foundUser) {
+    const foundLink = links.find((link) => link.id === Number(id));
+    if (!foundLink) {
       return response(res, {
         data: {
-          message: "user not found"
+          message: "link not found"
         },
         status: 400,
       });
     }
 
-    users = users.filter((user) => user.id !== Number(id));
+    links = links.filter((link) => link.id !== Number(id));
 
-    await writeDataAsync(users);
+    await writeDataAsync(links);
 
     response(res, {
       status: 204
@@ -160,9 +159,9 @@ const deleteUserById = async (req, res) => {
 };
 
 export {
-  getUsers,
-  createUser,
-  getUserById,
-  updateUser,
-  deleteUserById
+  getLinks,
+  createLink,
+  getLinkById,
+  updateLink,
+  deleteLinkById
 };
