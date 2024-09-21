@@ -1,14 +1,1 @@
-[{
-  "id": 1,
-  "sharedBy": "Promit Barua",
-  "type": "educational",
-  "link": "https://github.com/muhib-dev/raw-nodejs-api",
-  "description": "This is a toturial about making a working api by raw node.js without any frameworks"
-},
-  {
-    "id": 2,
-    "sharedBy": "Promit Barua",
-    "type": "educational",
-    "link": "https://www.smashingmagazine.com/2024/05/beyond-css-media-queries/",
-    "description": "This is an article about the problems and solutions of css media queries. Published by smashingmagazine.com"
-  }]
+[{"id":1,"sharedBy":"Promit Barua","type":"educational","link":"https://github.com/muhib-dev/raw-nodejs-api","description":"This is a toturial about making a working api by raw node.js without any frameworks"},{"id":2,"sharedBy":"Promit Barua","type":"educational","link":"https://www.smashingmagazine.com/2024/05/beyond-css-media-queries/","description":"This is an article about the problems and solutions of css media queries. Published by smashingmagazine.com"},{"sharedBy":"Promit Barua","type":"fantasy","link":"https://gamerant.com/interstellar-millers-planet-explained/","description":"This is an article about the millers planet from the movie Interstellar.","id":3}]
