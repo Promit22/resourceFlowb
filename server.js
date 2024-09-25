@@ -23,15 +23,11 @@ const server = createServer((req, res) => {
   }
   const parsedUrl = parse(req.url, true);
   const query = parsedUrl.query;
-  //console.log(req)
-  console.log(query['x-api-key']);
-  console.log(req.headers);
   let apiKey;
   const path = parsedUrl.pathname;
   const method = req.method.toUpperCase();
   if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
     apiKey = query['x-api-key'] || req.headers['x-api-key'];
-    console.log(apiKey);
   }
   let handler = routes[path] && routes[path][method];
 
