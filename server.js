@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 4000;
 const server = createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key');
 
   // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
@@ -23,8 +23,16 @@ const server = createServer((req, res) => {
   }
   const parsedUrl = parse(req.url, true);
   const query = parsedUrl.query;
+  //console.log(req)
+  console.log(query['x-api-key']);
+  console.log(req.headers);
+  let apiKey;
   const path = parsedUrl.pathname;
   const method = req.method.toUpperCase();
+  if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
+    apiKey = query['x-api-key'] || req.headers['x-api-key'];
+    console.log(apiKey);
+  }
   let handler = routes[path] && routes[path][method];
 
   if (!handler) {
@@ -60,13 +68,13 @@ const server = createServer((req, res) => {
   }
 
   // set query string in req
-  req.query = {};
+  /*req.query = {};
 
   for (const key in query) {
     req.query[key] = query[key];
   }
-
-  handler(req, res);
+  console.log(req.query);*/
+  handler(req, res, apiKey);
 });
 
 // global middleware

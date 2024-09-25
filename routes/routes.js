@@ -14,7 +14,7 @@ import {
 
 const routes = {
   "/": {
-    GET: (_req, res) => {
+    GET: (_req, res, _key) => {
       response(res, {
         data: {
           message: "Request successful! Try some endpoints."
@@ -24,18 +24,18 @@ const routes = {
   },
   "/links": {
     GET: getLinks,
-    POST: (req, res) => {
-      validateLinkData(req, res, createLink);
+    POST: (req, res, key) => {
+      validateLinkData(req, res, createLink, key);
     },
   },
   "/links/:id": {
     GET: getLinkById,
     DELETE: deleteLinkById,
-    PUT: (req, res) => {
-      validateUserData(req, res, updateLink);
+    PUT: (req, res, key) => {
+      validateLinkData(req, res, updateLink, key);
     },
   },
-  notFound: (_req, res) => {
+  notFound: (_req, res, _key) => {
     response(res, {
       status: 404,
       data: {
