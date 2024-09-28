@@ -39,7 +39,7 @@ async function generateKey(req, res, _key) {
     //console.log("Key created > ", key);
     response(res, {
       status: 200, data: {
-        apiKey: key, expiration: expiration
+        apiKey: key.key
       }});
   } catch (error) {
     console.log("Couldn't make the key ", error);
