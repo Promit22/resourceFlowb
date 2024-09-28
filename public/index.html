@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <nav>
+    <ul class="menu">
+      <li><a href="">Home</a></li>
+      <li><a href="#">Keys</a></li>
+      <li><a href="./gui/gui.html">GUI</a></li>
+    </ul>
+  </nav>
   <header>
     <h1>Welcome to ResourceFlow API</h1>
     <p>
@@ -18,7 +25,7 @@
   <section id="about">
     <h2>About ResourceFlow</h2>
     <p>
-      The ResourceFlow API allows users to post, update, delete, and retrieve links to valuable content related to climate, technology, and more.
+      The ResourceFlow API allows users to post, update, delete, and retrieve links to shared content.
     </p>
   </section>
 
@@ -40,7 +47,7 @@
       However, for <b>POST, PUT & DELETE</b> you must send your valid api key along with the request.
     </p>
     <p>
-      You can get your api key from <a href="">here</a> after creating an account
+      You can get your api key from <a href="">here</a>.
     </p>
   </section>
   <section id="code-examples">
@@ -90,11 +97,27 @@
       .then(data => console.log(data))
       .catch(error => console.error('Error fetching links:', error));
     </code></pre>
-  </section>
-  <footer>
-    <p>
-      &copy; 2024 ResourceFlow API
-    </p>
-  </footer>
-</body>
+    <section id="code-examples">
+      <h2>Updating a Link(the link you have posted)</h2>
+      <pre><code>
+        // Example: Update request to update your link
+        fetch('http://localhost:4000/links/:id', {
+        method: 'PUT',
+        headers: {
+        'content-Type': 'application/json',
+        'x-api-key': 'your-api-key-here'
+        },
+        body: "Your desired link(as a object) with the type and link(must) and optional sharedBy and description property" //make sure to JSON.stringify() it
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error fetching links:', error));
+      </code></pre>
+    </section>
+    <footer>
+      <p>
+        &copy; 2024 ResourceFlow API
+      </p>
+    </footer>
+  </body>
 </html>

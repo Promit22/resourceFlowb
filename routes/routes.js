@@ -2,8 +2,7 @@ import {
   getLinks,
   createLink,
   getLinkById,
-  updateLink,
-  deleteLinkById
+  updateLink
 } from "../controllers/linkController.js";
 import {
   response
@@ -11,6 +10,11 @@ import {
 import {
   validateLinkData
 } from"../validation/linkValidation.js";
+
+import {
+  generateKey
+} from"../validation/userValidation.js";
+
 
 const routes = {
   "/": {
@@ -30,10 +34,12 @@ const routes = {
   },
   "/links/:id": {
     GET: getLinkById,
-    DELETE: deleteLinkById,
     PUT: (req, res, key) => {
       validateLinkData(req, res, updateLink, key);
     },
+  },
+  "/keys": {
+    POST: generateKey
   },
   notFound: (_req, res, _key) => {
     response(res, {

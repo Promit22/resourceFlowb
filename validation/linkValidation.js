@@ -8,9 +8,9 @@ import {
   isValidUser
 } from "./userValidation.js";
 
-const validateLinkData = async (req, res, next, Ukey) => {
+const validateLinkData = async (req, res, next, uKey) => {
   try {
-    const validUser = await isValidUser(Ukey);
+    const validUser = await isValidUser(uKey);
     console.log(validUser);
     if (validUser) {
       const body = await getPostBodyAsync(req);

@@ -41,7 +41,7 @@ const createLink = async (req, res) => {
     });
   }
 };
-const getLinks = async (req, res) => {
+const getLinks = async (req, res, _key) => {
   try {
     const links = await getAllLinks();
 
@@ -57,7 +57,7 @@ const getLinks = async (req, res) => {
   }
 };
 
-const getLinkById = async (req, res) => {
+const getLinkById = async (req, res, _key) => {
   try {
     const {
       id
@@ -125,43 +125,9 @@ const updateLink = async (req, res) => {
   }
 };
 
-const deleteLinkById = async (req, res) => {
-  try {
-    const {
-      id
-    } = req.params;
-    let links = await getAllLinks();
-
-    const foundLink = links.find((link) => link.id === Number(id));
-    if (!foundLink) {
-      return response(res, {
-        data: {
-          message: "link not found"
-        },
-        status: 400,
-      });
-    }
-
-    links = links.filter((link) => link.id !== Number(id));
-
-    await writeDataAsync(links);
-
-    response(res, {
-      status: 204
-    });
-  } catch (error) {
-    response(res, {
-      status: 400, data: {
-        message: error.message
-      }
-    });
-  }
-};
-
 export {
   getLinks,
   createLink,
   getLinkById,
-  updateLink,
-  deleteLinkById
+  updateLink
 };
