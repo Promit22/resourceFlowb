@@ -7,8 +7,8 @@ import {
   getPostBodyAsync
 } from "../helpers/getPostBodyAsync.js";
 
-const accessKey = process.env.ACCESSKEY || 'test_access_PLpYjY6e1ubUM1FxOQDbPckLnXRLclde0nCk01wWK2JeRR5cG8hwFg77VuSKUJ0J';
-const projectId = process.env.PROJECTID || '60e674d1-a738-4e71-93a0-d0e6709005b1';
+const accessKey = process.env.ACCESSKEY;
+const projectId = process.env.PROJECTID;
 const theAuthAPI = new TheAuthAPI.default(accessKey, {
   retryCount: 2,
 });
